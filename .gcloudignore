@@ -1,0 +1,19 @@
+# Custom .gcloudignore to override .gitignore for deployment
+# We MUST upload the locally compiled "dist" folder so that the container has the real Firebase API keys!
+
+.git
+.hg
+node_modules/
+.env
+.env*
+logs/
+*.log
+tests/
+.agent/
+.gemini/
+
+# Large Media Files (do not upload to container runtime)
+**/*.mov
+**/*.gif
+**/*.mp4
+**/*.webm

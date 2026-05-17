@@ -1,0 +1,12 @@
+node_modules
+
+.env
+.git
+.gitignore
+*.mov
+*.gif
+test_pipeline.js
+mock data/demo.txt
+mock data/demo2.txt
+mock data/demo3.txt
+tests/

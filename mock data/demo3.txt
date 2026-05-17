@@ -1,0 +1,71 @@
+FREELANCE WEBSITE DESIGN AGREEMENT
+
+This Agreement is made between:
+
+Client: GreenLeaf Cafe
+Freelancer: Arjun Mehta
+Project: Website Design and Basic SEO Setup
+
+Effective Date: October 1, 2026
+
+1. Scope of Work
+The Freelancer will design a responsive 5-page website for the Client. The pages include Home, About, Menu, Gallery, and Contact. The Freelancer will also provide basic on-page SEO setup, contact form integration, and mobile responsiveness.
+
+2. Deliverables
+The Freelancer will provide:
+- Website design mockup
+- Final responsive website
+- Basic SEO meta titles and descriptions
+- Contact form setup
+- One revision round after final review
+
+3. Timeline
+The project will begin on October 1, 2026 and is expected to be completed by October 25, 2026. If delays occur due to late feedback, missing content, or technical issues, both parties will mutually agree on a revised timeline in writing.
+
+4. Payment Terms
+The total project fee is INR 45,000.
+
+Payment will be made in three parts:
+- 30% advance before work begins
+- 40% after design approval
+- 30% after final delivery
+
+Payments are due within 7 days of invoice receipt.
+
+5. Revisions
+One revision round is included after the first final version is delivered. Additional revisions may be charged separately, but only after written approval from the Client.
+
+6. Client Responsibilities
+The Client will provide required text, images, menu details, brand assets, and feedback within reasonable time. Delays in providing these items may affect the project timeline.
+
+7. Ownership
+After full payment is received, the Client will own the final website design and content created specifically for this project. The Freelancer may display screenshots of the completed project in a portfolio unless the Client requests confidentiality in writing.
+
+8. Third-Party Costs
+Domain, hosting, paid plugins, stock images, premium fonts, and third-party tools are not included in the project fee unless specifically mentioned. Any such cost will require Client approval before purchase.
+
+9. Confidentiality
+Both parties agree to keep private business information confidential. This obligation does not apply to information that is publicly available or already known before this agreement.
+
+10. Cancellation
+Either party may cancel the project by giving written notice.
+
+If the Client cancels the project, the Freelancer will be paid for work completed up to the cancellation date. Any unused portion of advance payment may be refunded after deducting completed work.
+
+If the Freelancer cancels without completing the work, the Freelancer will refund any amount paid for undelivered work.
+
+11. Limitation of Liability
+Neither party will be liable for indirect or consequential losses. However, this does not remove responsibility for unpaid fees, confidentiality breaches, or intentional misconduct.
+
+12. Dispute Resolution
+If a dispute arises, both parties agree to first attempt resolution through good-faith discussion. If unresolved, the matter may be referred to mediation before legal action.
+
+13. Changes to Agreement
+Any change to this Agreement must be made in writing and agreed by both parties.
+
+14. Acceptance
+Both parties confirm that they have read, understood, and accepted this Agreement.
+
+Client Signature: ___________________
+
+Freelancer Signature: ___________________

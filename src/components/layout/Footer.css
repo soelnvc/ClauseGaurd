@@ -1,0 +1,170 @@
+/* ============================================================
+   FOOTER — Minimal Light (Apple Aesthetic)
+   ============================================================ */
+
+.footer {
+  margin-top: auto;
+  position: relative;
+  background: transparent;
+  color: #6e6e73;
+  padding-top: var(--space-2xl);
+  font-family: var(--font-body);
+}
+
+/* ── AI Legal Disclaimer ── */
+.footer__legal {
+  font-size: 8px;
+  line-height: 1.4;
+  color: #86868b;
+  padding-bottom: var(--space-xl);
+  text-align: left;
+}
+
+.footer__legal p {
+  margin: 0;
+}
+
+/* ── Divider ── */
+.footer__divider {
+  height: 1px;
+  background-color: rgba(0, 0, 0, 0.1);
+  margin: 0 auto;
+}
+
+/* ── Inner Layout ── */
+.footer__inner {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: var(--space-3xl);
+  padding-top: var(--space-2xl);
+  padding-bottom: var(--space-2xl);
+}
+
+/* ── Brand Section ── */
+.footer__brand {
+  max-width: 340px;
+  flex-shrink: 0;
+}
+
+.footer__logo {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-lg);
+}
+
+.footer__logo-mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  background: #1d1d1f;
+  color: #ffffff;
+  font-family: var(--font-headline);
+  font-size: 1.1rem;
+  font-weight: 700;
+  border-radius: var(--radius-sm);
+}
+
+.footer__logo-text {
+  font-family: var(--font-headline);
+  font-size: var(--text-body-lg);
+  font-weight: 600;
+  color: #1d1d1f;
+  letter-spacing: var(--tracking-tight);
+}
+
+.footer__tagline {
+  font-size: 11px;
+  color: #86868b;
+  line-height: 1.6;
+}
+
+/* ── Link Columns ── */
+.footer__links {
+  display: flex;
+  gap: var(--space-3xl);
+}
+
+.footer__col {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  min-width: 140px;
+}
+
+.footer__col-title {
+  font-size: 11px;
+  font-weight: 600;
+  color: #1d1d1f;
+  margin-bottom: var(--space-xs);
+}
+
+.footer__link {
+  font-size: 11px;
+  font-weight: 400;
+  color: #424245;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.footer__link:hover {
+  color: #1d1d1f;
+  text-decoration: underline;
+}
+
+.footer__link--muted {
+  cursor: default;
+  color: #86868b;
+}
+
+.footer__link--muted:hover {
+  text-decoration: none;
+}
+
+/* ── Bottom Bar ── */
+.footer__bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: var(--space-lg);
+  padding-bottom: var(--space-xl);
+}
+
+.footer__copy {
+  font-size: 11px;
+  color: #86868b;
+}
+
+/* ── Responsive ── */
+@media (max-width: 900px) {
+  .footer__inner {
+    flex-direction: column;
+    gap: var(--space-2xl);
+  }
+
+  .footer__brand {
+    max-width: 100%;
+  }
+
+  .footer__links {
+    width: 100%;
+    justify-content: space-between;
+  }
+}
+
+@media (max-width: 600px) {
+  .footer__links {
+    flex-direction: column;
+    gap: var(--space-xl);
+  }
+
+  .footer__bottom {
+    flex-direction: column;
+    gap: var(--space-xs);
+    text-align: center;
+  }
+}

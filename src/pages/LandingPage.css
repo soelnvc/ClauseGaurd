@@ -1,0 +1,862 @@
+/* ============================================================
+   LANDING PAGE — Premium Magnetic Scroll Framework
+   ============================================================ */
+
+/* ── Reveal Classes (Controlled via useScrollReveal) ── */
+.reveal-up {
+  opacity: 0;
+  transform: translateY(40px);
+  transition:
+    opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+.reveal-up.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-left {
+  opacity: 0;
+  transform: translateX(-40px);
+  transition:
+    opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+.reveal-left.is-visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.reveal-right {
+  opacity: 0;
+  transform: translateX(40px);
+  transition:
+    opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+.reveal-right.is-visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Stagger delay classes */
+.delay-100 {
+  transition-delay: 100ms;
+}
+.delay-200 {
+  transition-delay: 200ms;
+}
+.delay-300 {
+  transition-delay: 300ms;
+}
+.delay-400 {
+  transition-delay: 400ms;
+}
+
+/* ── Container ── */
+.landing-page {
+  background-color: var(--onyx-rich);
+  color: var(--snow);
+  /* The global HTML is handling the snap type, this is just a wrapper */
+}
+
+/* ── Global Snap Enforcement for html (Attached dynamically in JSX) ── */
+/* Handled in index.css natively */
+
+/* ── Full Screen Scroll Blocks ── */
+.snap-section {
+  height: 100vh;
+  width: 100%;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  /* Top padding accounts for navbar overlap seamlessly */
+  padding-top: var(--navbar-height);
+  overflow: hidden;
+}
+
+/* Let the final footer section snap to its end intrinsically */
+.snap-section--auto {
+  height: auto;
+  min-height: 100vh; /* Actually, we want standard behavior for last section */
+  scroll-snap-align: start;
+}
+
+/* ── Shared Grid Architecture (50/50 layout) ── */
+.section-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-4xl);
+  width: 100%;
+  align-items: center;
+}
+
+/* ── Typography Override for Landing ── */
+.landing-headline {
+  font-family: var(--font-headline);
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  line-height: 1.05;
+  letter-spacing: var(--tracking-tight);
+  color: var(--snow);
+  margin-bottom: var(--space-lg);
+}
+
+.landing-subheadline {
+  font-family: var(--font-body);
+  font-size: var(--text-h3);
+  font-weight: 500;
+  color: var(--text-on-onyx-muted);
+  line-height: var(--leading-relaxed);
+  max-width: 600px;
+}
+
+/* ── Placeholder Boxes ── */
+.placeholder-box {
+  width: 100%;
+  aspect-ratio: 4/3;
+  background: var(--onyx-soft);
+  border: 1px dashed rgba(255, 255, 255, 0.2);
+  border-radius: var(--radius-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-on-onyx-muted);
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: var(--text-body-lg);
+  letter-spacing: var(--tracking-wide);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Add a slow dramatic glow effect to placeholders to make them feel premium */
+.placeholder-box::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  right: -50%;
+  bottom: -50%;
+  background: conic-gradient(
+    from 0deg at 50% 50%,
+    transparent 0%,
+    rgba(255, 255, 255, 0.05) 50%,
+    transparent 100%
+  );
+  animation: spin 10s linear infinite;
+  z-index: 0;
+}
+
+.placeholder-box span {
+  z-index: 1;
+  background: rgba(0, 0, 0, 0.5);
+  padding: 8px 16px;
+  border-radius: 8px;
+}
+
+/* ── Grid/Feature Cards ── */
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--space-xl);
+  width: 100%;
+  margin-top: var(--space-2xl);
+}
+
+.feature-card {
+  background: var(--onyx-soft);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  padding: var(--space-xl);
+  border-radius: var(--radius-lg);
+  transition:
+    transform 0.3s var(--ease-out-expo),
+    background 0.3s;
+}
+
+.feature-card:hover {
+  transform: translateY(-8px);
+  background: var(--onyx-dim);
+}
+
+.feature-card h3 {
+  color: var(--snow);
+  margin-bottom: var(--space-sm);
+  font-size: var(--text-h3);
+}
+
+.feature-card p {
+  color: var(--text-on-onyx-muted);
+}
+
+/* ── Hero Specific: Cinematic Sequence Track ── */
+.hero-track {
+  height: 400vh; /* Giving enough "scrolling room" for 192 frames */
+  position: relative;
+  scroll-snap-align: start; /* Magnetic snap locks to the TOP of the track */
+}
+
+.hero-sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background-color: var(--onyx-rich);
+}
+
+.hero-snap__content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 10;
+  pointer-events: none;
+}
+
+/* Integrated Content removed as per request */
+
+.hero-integrated-content p {
+  font-size: var(--text-body);
+  color: var(--text-on-onyx-muted);
+  margin-top: var(--space-sm);
+  text-shadow: 0 0 20px rgba(0, 0, 0, 1);
+}
+
+/* ── Removed Glass Badge (Integrated into circle now) ── */
+
+/* ── The Accent Circle (Shared Decor) ── */
+.hero-accent-circle {
+  position: absolute;
+  bottom: -250px;
+  right: -250px;
+  width: 500px;
+  height: 500px;
+  background-color: var(--onyx-rich);
+  border: 2px solid var(--snow);
+  border-radius: 50%;
+  z-index: 8;
+  pointer-events: none;
+}
+
+/* ── Hero Get Started Button ── */
+.hero-action-container {
+  position: absolute;
+  bottom: 80px; /* Positions it nicely at the bottom center visually */
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 15;
+  pointer-events: auto; /* Essential to break out of any pointer-events none */
+}
+
+.hero-glass-btn {
+  background: rgba(255, 255, 255, 0.05); /* Extremely sheer base */
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.15); /* Architectural thin border */
+  color: var(--snow);
+  font-family: var(--font-headline);
+  font-size: 1.15rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  padding: 16px 48px;
+  border-radius: var(--radius-pill); /* Pill shaped */
+  cursor: pointer;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  transition: all 0.4s var(--ease-out-expo);
+}
+
+.hero-glass-btn:hover {
+  background: rgba(255, 255, 255, 0.1); /* Brighter on hover */
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5), 0 0 30px rgba(255, 255, 255, 0.05);
+}
+
+.hero-glass-btn:active {
+  transform: translateY(1px);
+}
+
+/* Mirror circle for Screen 2 transition */
+.shared-circle-screen2 {
+  position: absolute;
+  top: -250px;
+  right: -250px;
+  width: 500px;
+  height: 500px;
+  background-color: var(--onyx-rich);
+  border: 2px solid var(--snow);
+  border-radius: 50%;
+  z-index: 8;
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+/* ── Claim Rejection Reality Graphic ── */
+.claim-reality-graphic {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: var(--radius-xl);
+  padding: var(--space-xl);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  transition:
+    border-color 0.3s,
+    background 0.3s;
+  cursor: pointer;
+}
+
+.claim-reality-graphic:hover {
+  border-color: rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.claim-reality-header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.claim-reality-header h3 {
+  font-family: var(--font-headline);
+  font-size: var(--text-h2);
+  color: var(--accent-red);
+  margin: 0;
+  letter-spacing: var(--tracking-tighter);
+  line-height: 1;
+  transition: text-shadow 0.3s;
+}
+
+.claim-reality-graphic:hover .claim-reality-header h3 {
+  text-shadow: 0 0 25px var(--accent-red);
+}
+
+.claim-reality-header p {
+  font-size: var(--text-body);
+  color: var(--text-on-onyx-muted);
+  font-weight: 500;
+}
+
+.claim-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-md);
+  margin-top: var(--space-sm);
+}
+
+.claim-card {
+  aspect-ratio: 3/4;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-md);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.5s var(--ease-out-expo);
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.reveal-graphic.is-visible .claim-card {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Stagger for 4 cards */
+.reveal-graphic.is-visible .claim-card:nth-child(1) {
+  transition-delay: 0.2s;
+}
+.reveal-graphic.is-visible .claim-card:nth-child(2) {
+  transition-delay: 0.3s;
+}
+.reveal-graphic.is-visible .claim-card:nth-child(3) {
+  transition-delay: 0.4s;
+}
+.reveal-graphic.is-visible .claim-card:nth-child(4) {
+  transition-delay: 0.5s;
+}
+
+.claim-card::after {
+  content: "✓";
+  font-size: 1.5rem;
+  color: var(--accent-green);
+  font-weight: bold;
+  filter: drop-shadow(0 0 10px rgba(40, 199, 111, 0.4));
+}
+
+.claim-card--rejected {
+  border-color: rgba(255, 59, 48, 0.3);
+  transition:
+    box-shadow 0.3s,
+    transform 0.3s;
+}
+
+.claim-reality-graphic:hover .claim-card--rejected {
+  box-shadow: 0 0 40px var(--accent-red);
+  transform: scale(1.05);
+}
+
+/* The Rejection moment */
+.reveal-graphic.is-visible .claim-card--rejected {
+  animation: reject-glitch 0.4s ease-out 1.2s forwards;
+}
+
+@keyframes reject-glitch {
+  0% {
+    transform: scale(1);
+    border-color: rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.05);
+  }
+  20% {
+    transform: scale(1.1) translateX(-5px);
+    background: rgba(255, 59, 48, 0.4);
+  }
+  40% {
+    transform: scale(1.1) translateX(5px);
+  }
+  60% {
+    transform: scale(1.05);
+    background: rgba(255, 59, 48, 0.2);
+    border-color: var(--accent-red);
+  }
+  100% {
+    transform: scale(1);
+    background: rgba(255, 59, 48, 0.15);
+    border-color: var(--accent-red);
+    box-shadow: 0 0 30px rgba(255, 59, 48, 0.4);
+  }
+}
+
+.claim-card--rejected::after {
+  content: "";
+}
+
+.reveal-graphic.is-visible .claim-card--rejected::before {
+  content: "✕";
+  position: absolute;
+  font-size: 2.5rem;
+  color: var(--accent-red);
+  font-weight: bold;
+  opacity: 0;
+  animation: fade-in 0.3s ease-out 1.5s forwards;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* ── Understanding Gap Graphic (Circular Gauge) ── */
+.understanding-gap-graphic {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: var(--radius-xl);
+  padding: var(--space-xl);
+  display: flex;
+  align-items: center;
+  gap: var(--space-xl);
+  position: relative;
+  transition:
+    transform 0.3s var(--ease-out-expo),
+    border-color 0.3s;
+  cursor: pointer;
+}
+
+.understanding-gap-graphic:hover {
+  border-color: rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.gauge-container {
+  position: relative;
+  width: 120px;
+  height: 120px;
+  flex-shrink: 0;
+}
+
+.gauge-svg {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+
+.gauge-bg {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.05);
+  stroke-width: 8;
+}
+
+.gauge-fill {
+  fill: none;
+  stroke: var(--accent-yellow);
+  stroke-width: 8;
+  stroke-linecap: round;
+  stroke-dasharray: 314.159;
+  stroke-dashoffset: 314.159;
+  transition: stroke-dashoffset 2s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.3s;
+  filter: drop-shadow(0 0 10px rgba(255, 204, 0, 0.2));
+}
+
+.reveal-graphic.is-visible .gauge-fill {
+  stroke-dashoffset: 31.415;
+}
+
+/* The Blue Power-Up Overlay */
+.gauge-fill--blue {
+  stroke: #00d2ff;
+  stroke-dashoffset: 314.159; /* Hidden by default */
+  filter: drop-shadow(0 0 20px rgba(0, 210, 255, 0.6));
+  transition: stroke-dashoffset 2s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.5s;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.gauge-fill--blue.is-active {
+  stroke-dashoffset: 31.415; /* Same as the yellow end state */
+  opacity: 1;
+}
+
+.gauge-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: var(--font-headline);
+  font-size: 2rem;
+  color: var(--snow);
+  letter-spacing: -1px;
+  transition:
+    text-shadow 0.3s,
+    color 0.3s;
+}
+
+.understanding-gap-graphic:hover .gauge-text {
+  text-shadow: 0 0 20px var(--snow);
+  color: #fff;
+}
+
+.gap-info h4 {
+  font-size: var(--text-body-lg);
+  color: var(--snow);
+  margin: 0 0 var(--space-xs) 0;
+}
+
+.gap-info p {
+  font-size: var(--text-body-sm);
+  color: var(--text-on-onyx-muted);
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* Sub-grid for dual graphics */
+.problem-graphics-stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  width: 100%;
+}
+
+/* ── Demo Video Container (Screen 4) ── */
+.demo-video-container {
+  width: 100%;
+  aspect-ratio: 16/9;
+  background: var(--onyx-soft);
+  border-radius: var(--radius-xl);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+}
+
+.demo-video-player {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.demo-video-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(10, 10, 10, 0.1) 0%,
+    rgba(10, 10, 10, 0) 50%,
+    rgba(10, 10, 10, 0.1) 100%
+  );
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* ── Spline Container & Watermark Mask ── */
+.spline-container-mask {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4/3;
+  overflow: hidden;
+  border-radius: var(--radius-xl);
+}
+
+.spline-watermark-mask {
+  position: absolute;
+  bottom: 0px;
+  right: 15px; /* Shifted left to center over the logo text */
+  width: 160px;
+  height: 140px;
+  background-color: var(--onyx-rich);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 50%;
+  z-index: 10;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  pointer-events: none;
+  box-shadow: 0 0 40px rgba(0, 0, 0, 0.9);
+}
+
+.ai-dot {
+  width: 6px;
+  height: 6px;
+  background-color: var(--accent-green);
+  border-radius: 50%;
+  box-shadow: 0 0 8px var(--accent-green);
+  animation: pulse-green 2s infinite;
+}
+
+@keyframes pulse-green {
+  0% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.4); opacity: 0.7; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.ai-label {
+  font-family: var(--font-headline);
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--snow);
+  letter-spacing: 0.5px;
+}
+
+/* Responsive Overrides */
+@media (max-width: 1024px) {
+  .section-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-2xl);
+  }
+
+  /* On mobile, forced 100vh can cause issues with overflowing text, auto height is safer */
+  .snap-section {
+    height: auto;
+    min-height: 100vh;
+    padding-top: calc(var(--navbar-height) + var(--space-2xl));
+    padding-bottom: var(--space-2xl);
+  }
+}
+
+/* ============================================================
+   LIGHTWEIGHT ZERO-ASSET PREMIUM STYLES
+   ============================================================ */
+
+/* ── Hero Animated Background ── */
+.hero-animated-background {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.mesh-gradient {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 10% 20%, rgba(120, 80, 255, 0.15) 0%, transparent 60%),
+              radial-gradient(circle at 90% 80%, rgba(0, 210, 255, 0.1) 0%, transparent 60%),
+              radial-gradient(circle at 50% 50%, rgba(15, 15, 20, 1) 0%, rgba(8, 8, 10, 1) 100%);
+  filter: blur(40px);
+}
+
+.particle-container {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.particle {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 50%;
+  filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.8));
+  animation: float-particle linear infinite;
+  pointer-events: none;
+  opacity: 0;
+}
+
+@keyframes float-particle {
+  0% {
+    transform: translateY(0) scale(0.5);
+    opacity: 0;
+  }
+  15% {
+    opacity: 0.8;
+  }
+  85% {
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateY(-120px) scale(1.2);
+    opacity: 0;
+  }
+}
+
+/* ── Interactive Scan Mockup Card (Zero-Asset Video Replacement) ── */
+.scan-mockup-card {
+  width: 100%;
+  aspect-ratio: 16/10;
+  background: rgba(10, 10, 12, 0.7);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-xl);
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.scan-mockup-header {
+  background: rgba(255, 255, 255, 0.03);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.dot-red { background: #ff5f56; }
+.dot-yellow { background: #ffbd2e; }
+.dot-green { background: #27c93f; }
+
+.scan-mockup-title {
+  font-family: var(--font-body);
+  font-size: var(--text-body-sm);
+  color: var(--text-on-onyx-muted);
+  margin-left: auto;
+  margin-right: auto;
+  font-weight: 500;
+}
+
+.scan-mockup-body {
+  padding: var(--space-xl);
+  flex-grow: 1;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: var(--text-body-sm);
+  color: #e5e7eb;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  position: relative;
+  overflow: hidden;
+  background: rgba(8, 8, 10, 0.3);
+}
+
+.scan-line-active {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #00d2ff, transparent);
+  animation: scan-vertical 4s linear infinite;
+  box-shadow: 0 0 10px #00d2ff;
+  z-index: 2;
+}
+
+@keyframes scan-vertical {
+  0% { top: 0%; }
+  50% { top: 100%; }
+  100% { top: 0%; }
+}
+
+.terminal-log {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  text-align: left;
+}
+
+.terminal-green { color: #27c93f; font-weight: bold; }
+.terminal-dim { color: #9ca3af; }
+.agent-scan-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.agent-tag-scan {
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 0.7rem;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.agent-tag-scan.extractor {
+  background: rgba(59, 130, 246, 0.15);
+  color: #60a5fa;
+  border: 1px solid rgba(59, 130, 246, 0.25);
+}
+
+.agent-tag-scan.danger {
+  background: rgba(239, 68, 68, 0.15);
+  color: #f87171;
+  border: 1px solid rgba(239, 68, 68, 0.25);
+}
+
+.agent-tag-scan.advocate {
+  background: rgba(245, 158, 11, 0.15);
+  color: #fbbf24;
+  border: 1px solid rgba(245, 158, 11, 0.25);
+}
+
+.text-danger { color: #f87171; }
+.text-warning { color: #fbbf24; }
+.text-success { color: #34d399; }
+.terminal-bold { font-weight: bold; }
